@@ -1,59 +1,50 @@
-# OWASP Juice Shop Installation Guide
+# OWASP Coraza WAF dengan Envoy Webserver
 
-OWASP Juice Shop is an intentionally insecure web application for security training, awareness demos, and CTFs. Follow the steps below to install and run Juice Shop using Docker Compose.
+Proyek ini menunjukkan cara menginstal OWASP Coraza WAF dengan server web Envoy menggunakan Docker.
 
-## Prerequisites
+## Prasyarat
 
-Before you begin, make sure you have the following installed on your system:
+- Docker dan Docker Compose sudah terpasang di mesin Anda.
 
-- [Git](https://git-scm.com/)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
+## Instalasi
 
-## Installation Steps
+1. Clone repositori:
 
-### 1. Clone the Repository
+   ```bash
+   git clone https://github.com/nurlanchip/coraza-envoy.git
+   ```
 
-Start by cloning the Juice Shop repository to your local machine using the following command:
+2. Masuk ke direktori proyek:
 
-```bash
-git clone https://github.com/nurlanchip/juiceshop.git
-```
+   ```bash
+   cd coraza-envoy
+   ```
 
-### 2. Start Juice Shop using Docker Compose
+3. Edit file `envoy.yaml` untuk memperbarui alamat IP dan port server backend:
 
-Navigate to the newly cloned directory and bring up the application using Docker Compose:
+   ```bash
+   nano envoy.yaml
+   ```
 
-```bash
-cd juiceshop
-docker compose up -d
-```
+   Ubah baris 119 dan 120 untuk mencerminkan alamat IP dan port server backend yang benar. Kemudian simpan perubahan.
 
-This command will pull the necessary Docker images and start the Juice Shop application in detached mode.
+4. Jalankan Docker container:
 
-### 3. Access Juice Shop
+   ```bash
+   docker compose up
+   ```
 
-Once the containers are running, open your web browser and go to:
+5. Akses aplikasi di browser Anda melalui:
 
-```
-http://<ip-address>:3000
-```
+   ```bash
+   http://<alamat-ip-anda>
+   ```
 
-Replace `<ip-address>` with your local machine's IP address or `localhost` if you're running Docker on your local machine.
+## Catatan
 
-## Stopping the Application
+- Pastikan untuk mengganti `<alamat-ip-anda>` dengan alamat IP sebenarnya dari mesin tempat Docker berjalan.
+- Envoy proxy akan menangani lalu lintas dan merutekannya melalui Coraza WAF untuk keamanan.
 
-To stop the application, run the following command:
+## Lisensi
 
-```bash
-docker compose down
-```
-
-## Additional Resources
-
-- [Official Juice Shop Documentation](https://owasp.org/www-project-juice-shop/)
-- [OWASP Juice Shop GitHub Repository](https://github.com/juice-shop/juice-shop)
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Proyek ini dilisensikan di bawah Lisensi MIT. Lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
